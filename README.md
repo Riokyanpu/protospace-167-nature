@@ -66,3 +66,18 @@ Things you may want to cover:
 
 - belongs_to :user
 - belongs_to :prototypes
+
+      
+
+  belongs_to :user
+  has_many :comments
+  has_one_attached :image
+
+  validates :title, presence: true
+  validates :catch_copy, presence: true
+  validates :concept, presence: true
+  validates :content, presence: true, unless: :was_attached?
+
+  def was_attached?
+    self.image.attached?
+  end
