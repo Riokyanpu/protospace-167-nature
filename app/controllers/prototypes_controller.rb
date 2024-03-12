@@ -2,6 +2,13 @@ class PrototypesController < ApplicationController
   def index
   end
 
-  def 
+  def show
+    @comment = Comment.new
+    @comments = comment.comments.includes(:user)
+  end
+
+
+
+
 end
 
