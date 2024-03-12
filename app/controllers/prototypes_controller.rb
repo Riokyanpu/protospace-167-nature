@@ -3,6 +3,8 @@ class PrototypesController < ApplicationController
     @prototypes = Prototype.all
   end
 
+
+
   def new
     @prototype = Prototype.new
   end
@@ -16,8 +18,12 @@ class PrototypesController < ApplicationController
     end
   end
 
+
     def show
-      @prototype = Prototype.find(params[:id])
+     @prototype = Prototype.find(params[:id])
+    @comment = Comment.new
+    @comments = comment.comments.includes(:user)
+  end
     end
 
   private
