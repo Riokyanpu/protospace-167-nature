@@ -4,7 +4,7 @@
       <%# <div class="greeting"> %>
         <% if current_user %>
            <div class="greeting">
-             <span>こんにちは</span><%= current_user.name %> <span>さん</span> 
+            <%= link_to "こんにちは#{current_user.name}さん",user_path(current_user) %>
            </div>
         <% end %>
 

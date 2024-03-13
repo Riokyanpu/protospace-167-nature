@@ -1,6 +1,7 @@
 <main class="main">
   <div class="inner">
     <div class="prototype__wrapper">
+      <%= render partial: 'prototype', collection: @prototypes %>
       <p class="prototype__hedding">
         <%= "プロトタイプのタイトル"%>
       </p>
@@ -42,9 +43,11 @@
         <%# // ログインしているユーザーには上記を表示する %>
         <ul class="comments_lists">
           <%# 投稿に紐づくコメントを一覧する処理を記述する %>
+          <% comments.each do |comment|%>
             <li class="comments_list">
-              <%# <%= " コメントのテキスト "%>
-              <%# <%= link_to "（ ユーザー名 ）", root_path, class: :comment_user %>
+              <%= link_to comment.user.name, user_path(comment_user) %>
+             
+ <%= link_to "by #{prototype.user.name}", user_path(prototype.user), class: :comment_user %>
             </li>
           <%# // 投稿に紐づくコメントを一覧する処理を記述する %>
         </ul>
