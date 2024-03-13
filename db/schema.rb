@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema[7.0].define(version: 2024_03_11_034201) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_11_023028) do
   create_table "active_storage_attachments", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -21,15 +20,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_11_034201) do
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
-  ActiveRecord::Schema[7.0].define(version: 2024_03_11_023028) do
-  create_table "comments", charset: "utf8", force: :cascade do |t|
-    t.text "content_id"
-    t.bigint "prototype_id"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["prototype_id"], name: "index_comments_on_prototype_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
 
   create_table "active_storage_blobs", charset: "utf8", force: :cascade do |t|
     t.string "key", null: false
@@ -49,6 +39,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_11_034201) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "comments", charset: "utf8", force: :cascade do |t|
+    t.text "content"
+    t.bigint "prototype_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["prototype_id"], name: "index_comments_on_prototype_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "prototypes", charset: "utf8", force: :cascade do |t|
     t.string "title", null: false
     t.text "catch_copy", null: false
@@ -57,7 +57,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_11_034201) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_prototypes_on_user_id"
-
   end
 
   create_table "users", charset: "utf8", force: :cascade do |t|
@@ -78,5 +77,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_11_034201) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "comments", "prototypes"
+  add_foreign_key "comments", "users"
   add_foreign_key "prototypes", "users"
 end
