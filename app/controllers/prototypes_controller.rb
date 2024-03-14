@@ -53,7 +53,7 @@ class PrototypesController < ApplicationController
 
   def move_to_index
     @prototype = Prototype.find(params[:id])
-    if current_user != @prototype.user
+      if current_user != @prototype.user
       redirect_to action: :index
     end
   end
